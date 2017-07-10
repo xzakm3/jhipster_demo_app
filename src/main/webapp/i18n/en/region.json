@@ -1,0 +1,10 @@
+{
+    "firstAppApp": {
+        "Region" : {
+            "null": "",
+            "AMERICA": "AMERICA",
+            "ASIA": "ASIA",
+            "EUROPE": "EUROPE"
+        }
+    }
+}

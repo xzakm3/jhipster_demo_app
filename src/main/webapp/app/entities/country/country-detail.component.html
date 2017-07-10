@@ -1,0 +1,33 @@
+
+<div *ngIf="country">
+    <h2><span jhiTranslate="firstAppApp.country.detail.title">Country</span> {{country.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="firstAppApp.country.countryName">Country Name</span></dt>
+        <dd>
+            <span>{{country.countryName}}</span>
+        </dd>
+        <dt><span jhiTranslate="firstAppApp.country.countryCode">Country Code</span></dt>
+        <dd>
+            <span>{{country.countryCode}}</span>
+        </dd>
+        <dt><span jhiTranslate="firstAppApp.country.region">Region</span></dt>
+        <dd>
+            <span jhiTranslate="{{'firstAppApp.Region.' + country.region}}">{{country.region}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'country/'+ country.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

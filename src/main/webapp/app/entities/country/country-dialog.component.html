@@ -1,0 +1,77 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCountryLabel" jhiTranslate="firstAppApp.country.home.createOrEditLabel">Create or edit a Country</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!country.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="country.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="firstAppApp.country.countryName" for="field_countryName">Country Name</label>
+            <input type="text" class="form-control" name="countryName" id="field_countryName"
+                [(ngModel)]="country.countryName" required minlength="2" maxlength="50" />
+            <div [hidden]="!(editForm.controls.countryName?.dirty && editForm.controls.countryName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.countryName?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.countryName?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 2 }">
+                   This field is required to be at least 2 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.countryName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="firstAppApp.country.countryCode" for="field_countryCode">Country Code</label>
+            <input type="number" class="form-control" name="countryCode" id="field_countryCode"
+                [(ngModel)]="country.countryCode" required min="1" />
+            <div [hidden]="!(editForm.controls.countryCode?.dirty && editForm.controls.countryCode?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.countryCode?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.countryCode?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1 }">
+                    This field should be at least 1.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.countryCode?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="firstAppApp.country.region" for="field_region">Region</label>
+            <select class="form-control" name="region" [(ngModel)]="country.region" id="field_region"  required>
+                <option value="AMERICA" jhiTranslate="firstAppApp.Region.AMERICA">AMERICA</option>
+                <option value="ASIA" jhiTranslate="firstAppApp.Region.ASIA">ASIA</option>
+                <option value="EUROPE" jhiTranslate="firstAppApp.Region.EUROPE">EUROPE</option>
+            </select>
+            <div [hidden]="!(editForm.controls.region?.dirty && editForm.controls.region?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.region?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
