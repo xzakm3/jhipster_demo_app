@@ -13,5 +13,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface CountryRepository extends JpaRepository<Country,Long> {
     // Unique code validation
-    Country findByCountryCode(Integer code);
+    Long countByCountryCode(Integer code);
 }

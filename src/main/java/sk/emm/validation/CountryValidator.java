@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import sk.emm.domain.Country;
-import sk.emm.repository.CountryRepository;
+import sk.emm.service.CountryService;
 
 
 /**
@@ -17,10 +17,10 @@ import sk.emm.repository.CountryRepository;
 public class CountryValidator implements Validator {
     private final Logger log = LoggerFactory.getLogger(CountryValidator.class);
 
-    private final CountryRepository countryRepository;
+    private final CountryService countryService;
 
-    public CountryValidator(CountryRepository countryRepository){
-        this.countryRepository = countryRepository;
+    public CountryValidator(CountryService countryService){
+        this.countryService = countryService;
     }
 
     @Override
@@ -33,8 +33,8 @@ public class CountryValidator implements Validator {
         log.debug("Request to validate Country: {}", object);
 
         Country cntFromRequest = (Country) object;
-        if (countryRepository.findByCountryCode(cntFromRequest.getCountryCode()) != null) {
-            errors.rejectValue("code", "code.exists");
+        if (!countryService.isUniqueCode(cntFromRequest.getCountryCode())) {
+            errors.rejectValue("countryCode", "countryCodeexists");
         }
     }
 }

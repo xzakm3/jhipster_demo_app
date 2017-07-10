@@ -69,4 +69,9 @@ public class CountryService{
         log.debug("Request to delete Country : {}", id);
         countryRepository.delete(id);
     }
+
+    public boolean isUniqueCode(Integer countryCode)
+    {
+        return countryRepository.countByCountryCode(countryCode) == 0;
+    }
 }
