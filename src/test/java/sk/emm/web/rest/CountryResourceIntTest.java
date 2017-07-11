@@ -53,10 +53,10 @@ public class CountryResourceIntTest {
     private CountryRepository countryRepository;
 
     @Autowired
-    private CountryValidator countryValidator;
+    private CountryService countryService;
 
     @Autowired
-    private CountryService countryService;
+    private CountryValidator countryValidator;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;

@@ -1,0 +1,38 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "country",
+            "otherEntityName": "country",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "countryName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "cityName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": "2"
+        },
+        {
+            "fieldName": "longtitude",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20170711081217",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "city",
+    "pagination": "infinite-scroll"
+}

@@ -37,11 +37,10 @@ public class CountryResource {
     private static final String ENTITY_NAME = "country";
 
     private final CountryService countryService;
-
     private final CountryValidator countryValidator;
 
     @InitBinder
-    protected void validationBinder(WebDataBinder binder){
+    protected void validationBinder(WebDataBinder binder) {
         binder.addValidators(countryValidator);
     }
 

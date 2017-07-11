@@ -17,7 +17,8 @@
             },
             "countryName": "Country Name",
             "countryCode": "Country Code",
-            "region": "Region"
+            "region": "Region",
+            "city": "City"
         }
     }
 }

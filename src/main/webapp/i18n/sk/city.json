@@ -1,0 +1,24 @@
+{
+    "firstAppApp": {
+        "city" : {
+            "home": {
+                "title": "Cities",
+                "createLabel": "Pridať City",
+                "createOrEditLabel": "Pridať alebo upraviť City"
+            },
+            "created": "Bol vytvorený potomok entity City s identifikátorom {{ param }}",
+            "updated": "Potomok entity City s identifikátorom {{ param }} bol upravený.",
+            "deleted": "Potomok entity City s identifikátorom {{ param }} bol vymazaný.",
+            "delete": {
+                "question": "Ste si istý, že chcete vymazať City {{ id }}?"
+            },
+            "detail": {
+                "title": "City"
+            },
+            "cityName": "City Name",
+            "longtitude": "Longtitude",
+            "latitude": "Latitude",
+            "country": "Country"
+        }
+    }
+}

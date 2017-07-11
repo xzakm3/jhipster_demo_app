@@ -1,0 +1,39 @@
+
+<div *ngIf="city">
+    <h2><span jhiTranslate="firstAppApp.city.detail.title">City</span> {{city.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="firstAppApp.city.cityName">City Name</span></dt>
+        <dd>
+            <span>{{city.cityName}}</span>
+        </dd>
+        <dt><span jhiTranslate="firstAppApp.city.longtitude">Longtitude</span></dt>
+        <dd>
+            <span>{{city.longtitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="firstAppApp.city.latitude">Latitude</span></dt>
+        <dd>
+            <span>{{city.latitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="firstAppApp.city.country">Country</span></dt>
+        <dd>
+            <div *ngIf="city.country">
+                <a [routerLink]="['/country', city.country?.id]">{{city.country?.countryName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'city/'+ city.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

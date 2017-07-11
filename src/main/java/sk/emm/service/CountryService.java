@@ -31,6 +31,7 @@ public class CountryService{
      * @param country the entity to save
      * @return the persisted entity
      */
+
     public Country save(Country country) {
         log.debug("Request to save Country : {}", country);
         return countryRepository.save(country);
@@ -42,6 +43,7 @@ public class CountryService{
      *  @param pageable the pagination information
      *  @return the list of entities
      */
+
     @Transactional(readOnly = true)
     public Page<Country> findAll(Pageable pageable) {
         log.debug("Request to get all Countries");
@@ -54,6 +56,7 @@ public class CountryService{
      *  @param id the id of the entity
      *  @return the entity
      */
+
     @Transactional(readOnly = true)
     public Country findOne(Long id) {
         log.debug("Request to get Country : {}", id);
@@ -65,17 +68,17 @@ public class CountryService{
      *
      *  @param id the id of the entity
      */
+
     public void delete(Long id) {
         log.debug("Request to delete Country : {}", id);
         countryRepository.delete(id);
     }
 
-    public boolean isUniqueCode(Integer countryCode)
-    {
-        return countryRepository.countByCountryCode(countryCode) == 0;
-    }
-
     public boolean isUniqueName(String countryName){
         return countryRepository.findByCountryName(countryName) == null;
+    }
+
+    public boolean isUniqueCode(Integer countryCode){
+        return countryRepository.countByCountryCode(countryCode) == 0;
     }
 }

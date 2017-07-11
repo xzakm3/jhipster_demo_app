@@ -1,9 +1,12 @@
 package sk.emm.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 import sk.emm.domain.enumeration.Region;
@@ -36,6 +39,10 @@ public class Country implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "region", nullable = false)
     private Region region;
+
+    @OneToMany(mappedBy = "country")
+    @JsonIgnore
+    private Set<City> cities = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -82,6 +89,31 @@ public class Country implements Serializable {
 
     public void setRegion(Region region) {
         this.region = region;
+    }
+
+    public Set<City> getCities() {
+        return cities;
+    }
+
+    public Country cities(Set<City> cities) {
+        this.cities = cities;
+        return this;
+    }
+
+    public Country addCity(City city) {
+        this.cities.add(city);
+        city.setCountry(this);
+        return this;
+    }
+
+    public Country removeCity(City city) {
+        this.cities.remove(city);
+        city.setCountry(null);
+        return this;
+    }
+
+    public void setCities(Set<City> cities) {
+        this.cities = cities;
     }
 
     @Override

@@ -8,6 +8,7 @@
             "entities": {
                 "main": "Entity",
                 "country": "Country",
+                "city": "City",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -129,7 +130,8 @@
         "emailexists": "Zadaný email už niekto používa!",
         "idexists": "Nová entita {{ entityName }} ešte nemôže mať ID",
         "countryCode.exists": "Zadaný kód krajiny je už použitý!",
-        "countryName.exists": "Krajina je už zaznamenaná v databáze"
+        "countryName.exists": "Krajina je už zaznamenaná v databáze",
+        "cityName.exists": "Mesto s daným názvom už je priradené nejakej krajine!"
     },
     "footer": "Toto je vaše zápätie"
 }
