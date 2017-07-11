@@ -128,7 +128,8 @@
         "userexists": "Zadané používateľské meno už niekto používa!",
         "emailexists": "Zadaný email už niekto používa!",
         "idexists": "Nová entita {{ entityName }} ešte nemôže mať ID",
-        "countryCodeexists": "Zadaný kód krajiny je už použitý!"
+        "countryCode.exists": "Zadaný kód krajiny je už použitý!",
+        "countryName.exists": "Krajina je už zaznamenaná v databáze"
     },
     "footer": "Toto je vaše zápätie"
 }

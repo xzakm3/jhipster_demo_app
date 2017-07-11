@@ -128,7 +128,8 @@
         "userexists": "Login name already used!",
         "emailexists": "Email is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID",
-        "countryCodeexists": "Code already used"
+        "countryCode.exists": "Code already used",
+        "countryName.exists": "Country name already recorded in database"
     },
     "footer": "This is your footer"
 }

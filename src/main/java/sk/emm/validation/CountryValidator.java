@@ -34,7 +34,11 @@ public class CountryValidator implements Validator {
 
         Country cntFromRequest = (Country) object;
         if (!countryService.isUniqueCode(cntFromRequest.getCountryCode())) {
-            errors.rejectValue("countryCode", "countryCodeexists");
+            errors.rejectValue("countryCode", "countryCode.exists");
+        }
+
+        if (!countryService.isUniqueName(cntFromRequest.getCountryName())){
+            errors.rejectValue("countryName", "countryName.exists");
         }
     }
 }

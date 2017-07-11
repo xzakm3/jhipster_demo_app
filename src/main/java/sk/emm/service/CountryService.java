@@ -74,4 +74,8 @@ public class CountryService{
     {
         return countryRepository.countByCountryCode(countryCode) == 0;
     }
+
+    public boolean isUniqueName(String countryName){
+        return countryRepository.findByCountryName(countryName) == null;
+    }
 }
