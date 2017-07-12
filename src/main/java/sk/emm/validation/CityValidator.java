@@ -34,7 +34,7 @@ public class CityValidator implements Validator {
         City cityFromRequest = (City) object;
 
         if (!cityService.isUniqueName(cityFromRequest.getCityName())){
-            errors.rejectValue("cityName", "idexists");
+            errors.rejectValue("cityName", "cityName.exists");
         }
     }
 }
