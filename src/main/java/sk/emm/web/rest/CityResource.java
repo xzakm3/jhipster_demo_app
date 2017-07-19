@@ -3,6 +3,7 @@ package sk.emm.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import org.springframework.web.bind.WebDataBinder;
 import sk.emm.domain.City;
+import sk.emm.domain.Country;
 import sk.emm.service.CityService;
 import sk.emm.validation.CityValidator;
 import sk.emm.web.rest.util.HeaderUtil;
@@ -102,7 +103,22 @@ public class CityResource {
     public ResponseEntity<List<City>> getAllCities(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Cities");
         Page<City> page = cityService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cities");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cities/");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET /cities/in/{name} : get all the cities got specific country.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of cities for specific countryName in body
+     */
+    @GetMapping("/cities/in/{name}")
+    @Timed
+    public ResponseEntity<List<City>> getSpecificCities(@ApiParam Pageable pageable, @PathVariable String name){
+        log.debug("REST request to get a page of Cities for specific countryName");
+        Page<City> page = cityService.findByCountryName(pageable, name);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cities/{name}");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

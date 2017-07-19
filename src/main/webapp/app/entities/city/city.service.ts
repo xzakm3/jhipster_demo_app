@@ -32,7 +32,14 @@ export class CityService {
         });
     }
 
-    query(req?: any): Observable<ResponseWrapper> {
+    querySpecific(req?: any, name?: String): Observable<ResponseWrapper> {
+        const options = createRequestOption(req);
+        console.log(name);
+        return this.http.get(`${this.resourceUrl}/in/${name}`, options)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
+    queryAll(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));

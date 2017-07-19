@@ -7,14 +7,16 @@ import { City } from './city.model';
 import { CityService } from './city.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
+import {Country} from "../country/country.model";
 
 @Component({
     selector: 'jhi-city',
     templateUrl: './city.component.html'
 })
 export class CityComponent implements OnInit, OnDestroy {
-
     cities: City[];
+    countriesNames: string[];
+    selectedCountryName: string;
     currentAccount: any;
     eventSubscriber: Subscription;
     itemsPerPage: number;
@@ -32,6 +34,8 @@ export class CityComponent implements OnInit, OnDestroy {
         private parseLinks: ParseLinks,
         private principal: Principal
     ) {
+        this.selectedCountryName = null;
+        this.countriesNames = [];
         this.cities = [];
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.page = 0;
@@ -43,12 +47,40 @@ export class CityComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.cityService.query({
+        this.countriesNames = [];
+        this.cityService.queryAll({
             page: this.page,
             size: this.itemsPerPage,
             sort: this.sort()
         }).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+            (res: ResponseWrapper) => this.onError(res.json),
+            () => this.getUniqueCountries(this.cities)
+        );
+
+    }
+
+    getUniqueCountries(cities: City[]) {
+        const flags = [];
+        for (let i = 0; i < cities.length; i++) {
+            if (flags[cities[i].country.countryName] !== true) {
+                flags[cities[i].country.countryName] = true;
+                this.countriesNames.push(cities[i].country.countryName);
+            }
+        }
+    }
+
+    changeCountry() {
+        this.cityService.querySpecific({
+            page: this.page,
+            size: this.itemsPerPage,
+            sort: this.sort()
+        },
+            this.selectedCountryName
+        ).subscribe(
+            (res: ResponseWrapper) => {
+                this.onSuccess(res.json, res.headers);
+            },
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
@@ -90,12 +122,14 @@ export class CityComponent implements OnInit, OnDestroy {
         return result;
     }
 
+    makeArrayEmpty(array: any[]) {
+        return (array = []);
+    }
+
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
-        for (let i = 0; i < data.length; i++) {
-            this.cities.push(data[i]);
-        }
+        this.cities = data;
     }
 
     private onError(error) {

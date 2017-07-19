@@ -8,10 +8,12 @@ import { CityService } from './city.service';
 
 @Component({
     selector: 'jhi-city-detail',
-    templateUrl: './city-detail.component.html'
+    templateUrl: './city-detail.component.html',
+    styleUrls: ['city-detail.component.css'],
 })
 export class CityDetailComponent implements OnInit, OnDestroy {
-
+    lat: number = 51.678418;
+    lng: number = 7.809007;
     city: City;
     private subscription: Subscription;
     private eventSubscriber: Subscription;

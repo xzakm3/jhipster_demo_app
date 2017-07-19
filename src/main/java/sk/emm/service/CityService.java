@@ -1,6 +1,7 @@
 package sk.emm.service;
 
 import sk.emm.domain.City;
+import sk.emm.domain.Country;
 import sk.emm.repository.CityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sk.emm.repository.CountryRepository;
+import sk.emm.web.rest.CountryResource;
 
 
 /**
@@ -21,8 +24,11 @@ public class CityService{
 
     private final CityRepository cityRepository;
 
-    public CityService(CityRepository cityRepository) {
+    private final CountryRepository countryRepository;
+
+    public CityService(CityRepository cityRepository, CountryRepository countryRepository) {
         this.cityRepository = cityRepository;
+        this.countryRepository = countryRepository;
     }
 
     /**
@@ -48,6 +54,14 @@ public class CityService{
     public Page<City> findAll(Pageable pageable) {
         log.debug("Request to get all Cities");
         return cityRepository.findAll(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<City> findByCountryName(Pageable pageable, String name){
+        log.debug("Request to get all Cities for Specific country name");
+
+        Country country = countryRepository.findByCountryName(name);
+        return cityRepository.findByCountry(pageable, country);
     }
 
     /**
